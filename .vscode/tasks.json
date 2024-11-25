@@ -2,9 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build FdF",
             "type": "shell",
             "command": "make",
+            "args": ["build/fdf"],
+            "group": "build",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build FdF drawing functions",
+            "type": "shell",
+            "command": "make",
+            "args": ["build/tests/test_drawing.out"],
             "group": "build",
             "problemMatcher": "$gcc"
         }
