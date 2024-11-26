@@ -118,7 +118,7 @@ MU_TEST(test_parse_cell_data_invalid_z_value)
 	int	expected_return;
 	int	actual_return;
 	t_point point;
-	char input[] = "invalid";
+	char input[] = "43invalid";
 
 	// ACT
 	expected_return = 0;
@@ -135,6 +135,22 @@ MU_TEST(test_parse_cell_data_invalid_color)
 	int	actual_return;
 	t_point point;
 	char input[] = "42,invalid";
+
+	// ACT
+	expected_return = 0;
+	actual_return = parse_cell_data(input, &point);
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+}
+
+MU_TEST(test_parse_cell_data_invalid_color_missing_value)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	t_point point;
+	char input[] = "42,0x";
 
 	// ACT
 	expected_return = 0;
@@ -184,6 +200,7 @@ MU_TEST_SUITE(parse_cell_data_test_suite)
 	MU_RUN_TEST(test_parse_cell_data_short_color_hex);
 	MU_RUN_TEST(test_parse_cell_data_invalid_z_value);
 	MU_RUN_TEST(test_parse_cell_data_invalid_color);
+	MU_RUN_TEST(test_parse_cell_data_invalid_color_missing_value);
 	MU_RUN_TEST(test_parse_cell_data_invalid_color_hex);
 	MU_RUN_TEST(test_parse_cell_data_invalid_color_format);
 }
