@@ -16,6 +16,14 @@
             "args": ["build/tests/test_drawing.out"],
             "group": "build",
             "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build FdF parsing functions",
+            "type": "shell",
+            "command": "make",
+            "args": ["build/tests/test_parsing.out"],
+            "group": "build",
+            "problemMatcher": "$gcc"
         }
     ]
 }
