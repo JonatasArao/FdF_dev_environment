@@ -34,6 +34,27 @@ MU_TEST(test_parse_cell_data_z_forty_two)
 	mu_assert_int_eq(expected_z_value, actual_z_value);
 }
 
+MU_TEST(test_parse_cell_data_z_minus_forty_two)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	int	expected_z_value;
+	int	actual_z_value;
+	t_point point;
+	char input[] = "-42";
+
+	// ACT
+	expected_return = 1;
+	actual_return = parse_cell_data(input, &point);
+	expected_z_value = -42;
+	actual_z_value = point.z;
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+	mu_assert_int_eq(expected_z_value, actual_z_value);
+}
+
 MU_TEST(test_parse_cell_data_z_forty_two_white_lowercase)
 {
 	// ARRANGE
@@ -195,6 +216,7 @@ MU_TEST(test_parse_cell_data_invalid_color_format)
 MU_TEST_SUITE(parse_cell_data_test_suite)
 {
 	MU_RUN_TEST(test_parse_cell_data_z_forty_two);
+	MU_RUN_TEST(test_parse_cell_data_z_minus_forty_two);
 	MU_RUN_TEST(test_parse_cell_data_z_forty_two_white_lowercase);
 	MU_RUN_TEST(test_parse_cell_data_z_forty_two_white_uppercase);
 	MU_RUN_TEST(test_parse_cell_data_short_color_hex);

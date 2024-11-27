@@ -29,7 +29,7 @@ TEST_OBJS_DIR = tests/objs
 TEST_FILES = test_parsing.c test_drawing.c
 
 TEST_PARSING_DIR = $(TEST_DIR)/parsing_functions
-TEST_PARSING_FILES = test_parse_cell_data.c
+TEST_PARSING_FILES = test_parse_cell_data.c test_add_point.c
 TEST_PARSING_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSING_FILES:.c=.o))
 
 TEST_DRAWING_DIR = $(TEST_DIR)/drawing_functions
@@ -43,6 +43,16 @@ TEST_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_FILES:.c=.o)) \
 all: $(BIN_DIR)/$(FDF_NAME) \
 	 $(BIN_DIR)/tests/test_parsing.out \
 	 $(BIN_DIR)/tests/test_drawing.out
+
+clean:
+	rm -rf $(OBJS) $(OBJS_DIR) $(TEST_OBJS) $(TEST_OBJS_DIR)
+	@make -C $(MLX_DIR) clean
+	@make -C $(LIBFT_DIR) clean
+
+fclean: clean
+	rm -rf $(FDF_NAME) $(BIN_DIR)
+
+re: fclean all
 
 $(BIN_DIR)/$(FDF_NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(BIN_DIR)/$(FDF_NAME)
@@ -90,15 +100,5 @@ $(BIN_DIR)/tests/test_drawing.out: \
 
 $(TEST_OBJS_DIR)/%.o: $(TEST_DRAWING_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
-
-clean:
-	rm -rf $(OBJS) $(OBJS_DIR) $(TEST_OBJS) $(TEST_OBJS_DIR)
-	@make -C $(MLX_DIR) clean
-	@make -C $(LIBFT_DIR) clean
-
-fclean: clean
-	rm -rf $(FDF_NAME) $(BIN_DIR)
-
-re: fclean all
 
 .PHONY: all clean fclean re

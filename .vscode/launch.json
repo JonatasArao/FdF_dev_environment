@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/fdf",
-            "args": ["${workspaceFolder}/test_maps/elem-col.fdf"],
+            "args": ["${workspaceFolder}/test_maps/t1.fdf"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "externalConsole": false,
