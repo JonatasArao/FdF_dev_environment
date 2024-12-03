@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 06:41:43 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/03 11:59:31 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:40:16 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,10 @@ int	main(void)
 	test_parse_cell();
 	printf(PRINTCYAN("\nTesting: add_point\n"));
 	test_add_point();
+	printf(PRINTCYAN("\nTesting: parse_line\n"));
+	test_parse_line();
+	printf(PRINTCYAN("\nTesting: parse_mapfile\n"));
+	test_parse_mapfile();
+	printf(PRINTCYAN("\nTesting: extract_points\n"));
+	test_extract_points();
 }

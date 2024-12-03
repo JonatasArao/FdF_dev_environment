@@ -26,10 +26,15 @@ TEST_DIR = tests
 TEST_HEADER = $(TEST_DIR)/tests.h
 TEST_INCLUDES = $(INCLUDES) -I$(TEST_DIR)
 TEST_OBJS_DIR = tests/objs
-TEST_FILES = test_parsing.c test_drawing.c
+TEST_FILES =	test_parsing.c \
+				test_drawing.c
 
 TEST_PARSING_DIR = $(TEST_DIR)/parsing_functions
-TEST_PARSING_FILES = test_parse_cell.c test_add_point.c
+TEST_PARSING_FILES =	test_parse_cell.c \
+						test_add_point.c  \
+						test_parse_line.c \
+						test_parse_mapfile.c \
+						test_extract_points.c
 TEST_PARSING_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSING_FILES:.c=.o))
 
 TEST_DRAWING_DIR = $(TEST_DIR)/drawing_functions

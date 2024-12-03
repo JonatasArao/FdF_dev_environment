@@ -237,6 +237,32 @@ MU_TEST(test_parse_cell_invalid_color_hex)
 	mu_assert_int_eq(expected_color_value, actual_color_value);
 }
 
+MU_TEST(test_parse_cell_color_bigger_than_FFFFFF)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	int	expected_z_value;
+	int	actual_z_value;
+	int	expected_color_value;
+	int	actual_color_value;
+	t_point point;
+	char input[] = "42,0x1FFFFFF";
+
+	// ACT
+	expected_return = 1;
+	actual_return = parse_cell(input, &point);
+	expected_z_value = 42;
+	actual_z_value = point.z;
+	expected_color_value = 0xFFFFFF;
+	actual_color_value = point.color;
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+	mu_assert_int_eq(expected_z_value, actual_z_value);
+	mu_assert_int_eq(expected_color_value, actual_color_value);
+}
+
 MU_TEST(test_parse_cell_invalid_color_format)
 {
 	// ARRANGE
@@ -263,6 +289,54 @@ MU_TEST(test_parse_cell_invalid_color_format)
 	mu_assert_int_eq(expected_color_value, actual_color_value);
 }
 
+MU_TEST(test_parse_cell_minus_sign_only)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	t_point point;
+	char input[] = "-";
+
+	// ACT
+	expected_return = 0;
+	actual_return = parse_cell(input, &point);
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+}
+
+MU_TEST(test_parse_cell_plus_sign_only)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	t_point point;
+	char input[] = "-";
+
+	// ACT
+	expected_return = 0;
+	actual_return = parse_cell(input, &point);
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+}
+
+MU_TEST(test_parse_cell_empty_string)
+{
+	// ARRANGE
+	int	expected_return;
+	int	actual_return;
+	t_point point;
+	char input[] = "";
+
+	// ACT
+	expected_return = 0;
+	actual_return = parse_cell(input, &point);
+
+	// ASSERT
+	mu_assert_int_eq(expected_return, actual_return);
+}
+
 MU_TEST_SUITE(parse_cell_test_suite)
 {
 	MU_RUN_TEST(test_parse_cell_z_forty_two);
@@ -274,7 +348,11 @@ MU_TEST_SUITE(parse_cell_test_suite)
 	MU_RUN_TEST(test_parse_cell_invalid_color);
 	MU_RUN_TEST(test_parse_cell_invalid_color_missing_value);
 	MU_RUN_TEST(test_parse_cell_invalid_color_hex);
+	MU_RUN_TEST(test_parse_cell_color_bigger_than_FFFFFF);
 	MU_RUN_TEST(test_parse_cell_invalid_color_format);
+	MU_RUN_TEST(test_parse_cell_minus_sign_only);
+	MU_RUN_TEST(test_parse_cell_plus_sign_only);
+	MU_RUN_TEST(test_parse_cell_empty_string);
 }
 
 int	test_parse_cell(void) {
