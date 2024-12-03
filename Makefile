@@ -29,7 +29,7 @@ TEST_OBJS_DIR = tests/objs
 TEST_FILES = test_parsing.c test_drawing.c
 
 TEST_PARSING_DIR = $(TEST_DIR)/parsing_functions
-TEST_PARSING_FILES = test_parse_cell_data.c test_add_point.c
+TEST_PARSING_FILES = test_parse_cell.c test_add_point.c
 TEST_PARSING_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSING_FILES:.c=.o))
 
 TEST_DRAWING_DIR = $(TEST_DIR)/drawing_functions
