@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:04:25 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/11/27 12:08:31 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/03 07:43:52 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,18 +179,18 @@ MU_TEST(test_add_point_multiple_points)
 	add_point(&points, 3, 4, cell2);
 
 	mu_assert(points != NULL, "The list should not be NULL");
-	point1 = (t_point *)points->content;
-	mu_assert_int_eq(1, point1->x);
-	mu_assert_int_eq(2, point1->y);
-	mu_assert_int_eq(42, point1->z);
-	mu_assert_int_eq(0xFFFFFF, point1->color);
-
-	mu_assert(points->next != NULL, "The next node should not be NULL");
-	point2 = (t_point *)points->next->content;
+	point2 = (t_point *)points->content;
 	mu_assert_int_eq(3, point2->x);
 	mu_assert_int_eq(4, point2->y);
 	mu_assert_int_eq(84, point2->z);
 	mu_assert_int_eq(0x000000, point2->color);
+
+	mu_assert(points->next != NULL, "The next node should not be NULL");
+	point1 = (t_point *)points->next->content;
+	mu_assert_int_eq(1, point1->x);
+	mu_assert_int_eq(2, point1->y);
+	mu_assert_int_eq(42, point1->z);
+	mu_assert_int_eq(0xFFFFFF, point1->color);
 
 	mu_assert(points->next->next == NULL, "The next node of the second point should be NULL");
 

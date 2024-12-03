@@ -50,7 +50,7 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -rf $(FDF_NAME) $(BIN_DIR)
+	rm -rf $(BIN_DIR) $(MLX_LIB) $(LIBFT_LIB)
 
 re: fclean all
 
@@ -58,7 +58,7 @@ $(BIN_DIR)/$(FDF_NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(BIN_DIR)/$(FDF_NAME)
 
 $(LIBFT_LIB):
-	@make -C $(LIBFT_DIR)
+	@make debug -C $(LIBFT_DIR)
 
 $(MLX_LIB):
 	@make -C $(MLX_DIR)
