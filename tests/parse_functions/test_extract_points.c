@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:39:11 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/03 17:56:39 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/04 07:32:59 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,76 @@ MU_TEST(test_extract_points_invalid_file)
 	mu_assert(points == NULL, "Points should be NULL for a non-existent file.");
 }
 
+MU_TEST(test_extract_points_no_extension_file)
+{
+	// ARRANGE
+	t_list	*points;
+	int		fd;
+	char	*filename = "no_extension";
+	char	*file_content = "1 2 3\n4 5 6";
+
+	// Create a temporary file with the test content
+	fd = open(filename, O_CREAT | O_WRONLY, 0644);
+	if (fd == -1)
+	{
+		perror("Cannot create test file.");
+		return;
+	}
+	write(fd, file_content, strlen(file_content));
+	close(fd);
+
+	// ACT
+	points = extract_points(filename);
+
+	// ASSERT
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(6, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	points = points->next;
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
+	mu_assert_int_eq(5, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	points = points->next;
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
+	mu_assert_int_eq(4, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	points = points->next;
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(3, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	points = points->next;
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	points = points->next;
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->content)->z);
+	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
+
+	ft_lstclear(&points, free);
+
+	// Clean up the temporary file
+	remove(filename);
+}
+
 MU_TEST_SUITE(parse_mapfile_test_suite)
 {
 	MU_RUN_TEST(test_extract_points_simple_file);
 	MU_RUN_TEST(test_extract_points_multiple_points);
 	MU_RUN_TEST(test_extract_points_empty_file);
 	MU_RUN_TEST(test_extract_points_invalid_file);
+	MU_RUN_TEST(test_extract_points_no_extension_file);
 }
 
 int	test_extract_points(void) {

@@ -17,7 +17,7 @@ HEADER = $(HEADER_DIR)/fdf.h
 INCLUDES = -I$(HEADER_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 
 SRCS_DIR = $(TARGET)/src
-SRCS_FILES = parsing.c drawing.c main.c
+SRCS_FILES = parse.c render.c main.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS_DIR = $(TARGET)/objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
@@ -26,28 +26,28 @@ TEST_DIR = tests
 TEST_HEADER = $(TEST_DIR)/tests.h
 TEST_INCLUDES = $(INCLUDES) -I$(TEST_DIR)
 TEST_OBJS_DIR = tests/objs
-TEST_FILES =	test_parsing.c \
-				test_drawing.c
+TEST_FILES =	test_parse.c \
+				test_render.c
 
-TEST_PARSING_DIR = $(TEST_DIR)/parsing_functions
-TEST_PARSING_FILES =	test_parse_cell.c \
+TEST_PARSE_DIR = $(TEST_DIR)/parse_functions
+TEST_PARSE_FILES =	test_parse_cell.c \
 						test_add_point.c  \
 						test_parse_line.c \
 						test_parse_mapfile.c \
 						test_extract_points.c
-TEST_PARSING_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSING_FILES:.c=.o))
+TEST_PARSE_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSE_FILES:.c=.o))
 
-TEST_DRAWING_DIR = $(TEST_DIR)/drawing_functions
-TEST_DRAWING_FILES = test_img_pix_put.c
-TEST_DRAWING_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_DRAWING_FILES:.c=.o))
+TEST_RENDER_DIR = $(TEST_DIR)/render_functions
+TEST_RENDER_FILES = test_img_pix_put.c
+TEST_RENDER_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_RENDER_FILES:.c=.o))
 
 TEST_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_FILES:.c=.o)) \
-			$(TEST_PARSING_OBJS) \
-			$(TEST_DRAWING_OBJS)
+			$(TEST_PARSE_OBJS) \
+			$(TEST_RENDER_OBJS)
 
 all: $(BIN_DIR)/$(FDF_NAME) \
-	 $(BIN_DIR)/tests/test_parsing.out \
-	 $(BIN_DIR)/tests/test_drawing.out
+	 $(BIN_DIR)/tests/test_parse.out \
+	 $(BIN_DIR)/tests/test_render.out
 
 clean:
 	rm -rf $(OBJS) $(OBJS_DIR) $(TEST_OBJS) $(TEST_OBJS_DIR)
@@ -86,24 +86,24 @@ $(TEST_OBJS_DIR):
 $(TEST_OBJS_DIR)/%.o: $(TEST_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
 
-$(BIN_DIR)/tests/test_parsing.out: \
-	$(OBJS_DIR)/parsing.o \
-	$(TEST_OBJS_DIR)/test_parsing.o \
-	$(TEST_PARSING_OBJS) \
+$(BIN_DIR)/tests/test_parse.out: \
+	$(OBJS_DIR)/parse.o \
+	$(TEST_OBJS_DIR)/test_parse.o \
+	$(TEST_PARSE_OBJS) \
 	$(LIBFT_LIB) $(MLX_LIB) | $(BIN_DIR)/tests
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
-$(TEST_OBJS_DIR)/%.o: $(TEST_PARSING_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
+$(TEST_OBJS_DIR)/%.o: $(TEST_PARSE_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
 
-$(BIN_DIR)/tests/test_drawing.out: \
-	$(OBJS_DIR)/drawing.o \
-	$(TEST_OBJS_DIR)/test_drawing.o \
-	$(TEST_DRAWING_OBJS) \
+$(BIN_DIR)/tests/test_render.out: \
+	$(OBJS_DIR)/render.o \
+	$(TEST_OBJS_DIR)/test_render.o \
+	$(TEST_RENDER_OBJS) \
 	$(LIBFT_LIB) $(MLX_LIB) | $(BIN_DIR)/tests
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
-$(TEST_OBJS_DIR)/%.o: $(TEST_DRAWING_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
+$(TEST_OBJS_DIR)/%.o: $(TEST_RENDER_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
 
 .PHONY: all clean fclean re

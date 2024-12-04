@@ -10,18 +10,18 @@
             "problemMatcher": "$gcc"
         },
         {
-            "label": "build FdF drawing functions",
+            "label": "build FdF render functions",
             "type": "shell",
             "command": "make",
-            "args": ["build/tests/test_drawing.out"],
+            "args": ["build/tests/test_render.out"],
             "group": "build",
             "problemMatcher": "$gcc"
         },
         {
-            "label": "build FdF parsing functions",
+            "label": "build FdF parse functions",
             "type": "shell",
             "command": "make",
-            "args": ["build/tests/test_parsing.out"],
+            "args": ["build/tests/test_parse.out"],
             "group": "build",
             "problemMatcher": "$gcc"
         }

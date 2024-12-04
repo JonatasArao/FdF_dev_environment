@@ -27,7 +27,7 @@
             "name": "Debug Drawing Functions",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/tests/test_drawing.out",
+            "program": "${workspaceFolder}/build/tests/test_render.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -40,13 +40,13 @@
                     "ignoreFailures": true
                 }
             ],
-			"preLaunchTask": "build FdF drawing functions"
+			"preLaunchTask": "build FdF render functions"
         },
         {
             "name": "Debug Parsing Functions",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/tests/test_parsing.out",
+            "program": "${workspaceFolder}/build/tests/test_parse.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -59,7 +59,7 @@
                     "ignoreFailures": true
                 }
             ],
-			"preLaunchTask": "build FdF parsing functions"
+			"preLaunchTask": "build FdF parse functions"
         },
     ]
 }
