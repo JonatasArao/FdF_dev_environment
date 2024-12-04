@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:17:04 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/03 15:51:47 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:57:22 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ MU_TEST(test_parse_line_single_value)
 
 	// ASSERT
 	mu_assert_int_eq(expected_return, actual_return);
-	mu_assert_int_eq(84, ((t_point *)points->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->content)->y);
 	mu_assert_int_eq(42, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 	ft_lstclear(&points, free);
@@ -48,18 +48,18 @@ MU_TEST(test_parse_line_multiple_values)
 
 	// ASSERT
 	mu_assert_int_eq(expected_return, actual_return);
-	mu_assert_int_eq(84, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->content)->y);
 	mu_assert_int_eq(0, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
-	mu_assert_int_eq(84, ((t_point *)points->next->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->next->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->content)->y);
 	mu_assert_int_eq(-42, ((t_point *)points->next->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->next->content)->color);
 
-	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->y);
 	mu_assert_int_eq(42, ((t_point *)points->next->next->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->next->next->content)->color);
 	ft_lstclear(&points, free);
@@ -78,19 +78,19 @@ MU_TEST(test_parse_line_with_colors)
 	actual_return = parse_line(84, input, &points);
 
 	// ASSERT
-	mu_assert_int_eq(84, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->content)->y);
 	mu_assert_int_eq(0, ((t_point *)points->content)->z);
 	mu_assert_int_eq(0x123456, ((t_point *)points->content)->color);
 
-	mu_assert_int_eq(84, ((t_point *)points->next->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->next->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->content)->y);
 	mu_assert_int_eq(-42, ((t_point *)points->next->content)->z);
 	mu_assert_int_eq(0x000000, ((t_point *)points->next->content)->color);
 
 	mu_assert_int_eq(expected_return, actual_return);
-	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->y);
 	mu_assert_int_eq(42, ((t_point *)points->next->next->content)->z);
 	mu_assert_int_eq(0xFFFFFF, ((t_point *)points->next->next->content)->color);
 	ft_lstclear(&points, free);
@@ -161,18 +161,18 @@ MU_TEST(test_parse_line_with_extra_spaces)
 
 	// ASSERT
 	mu_assert_int_eq(expected_return, actual_return);
-	mu_assert_int_eq(84, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->content)->y);
 	mu_assert_int_eq(0, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
-	mu_assert_int_eq(84, ((t_point *)points->next->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->next->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->content)->y);
 	mu_assert_int_eq(-42, ((t_point *)points->next->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->next->content)->color);
 
-	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->next->next->content)->x);
+	mu_assert_int_eq(84, ((t_point *)points->next->next->content)->y);
 	mu_assert_int_eq(42, ((t_point *)points->next->next->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->next->next->content)->color);
 	ft_lstclear(&points, free);
@@ -192,13 +192,13 @@ MU_TEST(test_parse_line_with_negative_coordinates)
 
 	// ASSERT
 	mu_assert_int_eq(expected_return, actual_return);
-	mu_assert_int_eq(-84, ((t_point *)points->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(-84, ((t_point *)points->content)->y);
 	mu_assert_int_eq(42, ((t_point *)points->content)->z);
 	mu_assert_int_eq(0x000000, ((t_point *)points->content)->color);
 
-	mu_assert_int_eq(-84, ((t_point *)points->next->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->next->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->next->content)->x);
+	mu_assert_int_eq(-84, ((t_point *)points->next->content)->y);
 	mu_assert_int_eq(-42, ((t_point *)points->next->content)->z);
 	mu_assert_int_eq(0xFFFFFF, ((t_point *)points->next->content)->color);
 	ft_lstclear(&points, free);

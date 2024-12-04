@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:39:11 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/04 07:32:59 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:16:09 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ MU_TEST(test_extract_points_multiple_points)
 	points = extract_points(filename);
 
 	// ASSERT
-	mu_assert_int_eq(1, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
 	mu_assert_int_eq(5, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
@@ -79,20 +79,20 @@ MU_TEST(test_extract_points_multiple_points)
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(1, ((t_point *)points->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
 	mu_assert_int_eq(3, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(0, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
 	mu_assert_int_eq(2, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(0, ((t_point *)points->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
 	mu_assert_int_eq(1, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
@@ -148,7 +148,6 @@ MU_TEST(test_extract_points_invalid_file)
 	// ASSERT
 	mu_assert(points == NULL, "Points should be NULL for a non-existent file.");
 }
-
 MU_TEST(test_extract_points_no_extension_file)
 {
 	// ARRANGE
@@ -171,8 +170,8 @@ MU_TEST(test_extract_points_no_extension_file)
 	points = extract_points(filename);
 
 	// ASSERT
-	mu_assert_int_eq(1, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
 	mu_assert_int_eq(6, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
@@ -183,20 +182,20 @@ MU_TEST(test_extract_points_no_extension_file)
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(1, ((t_point *)points->content)->x);
-	mu_assert_int_eq(0, ((t_point *)points->content)->y);
+	mu_assert_int_eq(0, ((t_point *)points->content)->x);
+	mu_assert_int_eq(1, ((t_point *)points->content)->y);
 	mu_assert_int_eq(4, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(0, ((t_point *)points->content)->x);
-	mu_assert_int_eq(2, ((t_point *)points->content)->y);
+	mu_assert_int_eq(2, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
 	mu_assert_int_eq(3, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
 	points = points->next;
-	mu_assert_int_eq(0, ((t_point *)points->content)->x);
-	mu_assert_int_eq(1, ((t_point *)points->content)->y);
+	mu_assert_int_eq(1, ((t_point *)points->content)->x);
+	mu_assert_int_eq(0, ((t_point *)points->content)->y);
 	mu_assert_int_eq(2, ((t_point *)points->content)->z);
 	mu_assert_int_eq(DEFAULT_COLOR, ((t_point *)points->content)->color);
 
