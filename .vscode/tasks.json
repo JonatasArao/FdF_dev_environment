@@ -24,6 +24,14 @@
             "args": ["build/tests/test_parse.out"],
             "group": "build",
             "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build FdF vectorize functions",
+            "type": "shell",
+            "command": "make",
+            "args": ["build/tests/test_vectorize.out"],
+            "group": "build",
+            "problemMatcher": "$gcc"
         }
     ]
 }

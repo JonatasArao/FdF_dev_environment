@@ -24,7 +24,7 @@
 			"preLaunchTask": "build FdF"
         },
         {
-            "name": "Debug Drawing Functions",
+            "name": "Debug Render Functions",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tests/test_render.out",
@@ -43,7 +43,7 @@
 			"preLaunchTask": "build FdF render functions"
         },
         {
-            "name": "Debug Parsing Functions",
+            "name": "Debug Parse Functions",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tests/test_parse.out",
@@ -60,6 +60,25 @@
                 }
             ],
 			"preLaunchTask": "build FdF parse functions"
+        },
+        {
+            "name": "Debug Vectorize Functions",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/tests/test_vectorize.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+			"preLaunchTask": "build FdF vectorize functions"
         },
     ]
 }

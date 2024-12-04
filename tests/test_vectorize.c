@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.h                                            :+:      :+:    :+:   */
+/*   test_vectorize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 14:09:35 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/04 11:10:44 by jarao-de         ###   ########.fr       */
+/*   Created: 2024/12/04 11:09:58 by jarao-de          #+#    #+#             */
+/*   Updated: 2024/12/04 11:10:21 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTS_H
-# define TESTS_H
-# include <stdio.h>
-# include "fdf.h"
-# define PRINTCYAN(X) "\033[1;36m"X"\033[0m"
+#include "tests.h"
 
-int	test_img_pix_put(void);
-
-int	test_parse_cell(void);
-
-int	test_add_point(void);
-
-int	test_parse_line(void);
-
-int	test_parse_mapfile(void);
-
-int	test_extract_points(void);
-
-int	test_add_vector(void);
-
-#endif
+int	main(void)
+{
+	printf(PRINTCYAN("\nTesting: add_vector\n"));
+	test_add_vector();
+}

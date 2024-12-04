@@ -37,6 +37,10 @@ TEST_PARSE_FILES =	test_parse_cell.c \
 						test_extract_points.c
 TEST_PARSE_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSE_FILES:.c=.o))
 
+TEST_VECTORIZE_DIR = $(TEST_DIR)/vectorize_functions
+TEST_VECTORIZE_FILES = test_add_vector.c
+TEST_VECTORIZE_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_VECTORIZE_FILES:.c=.o))
+
 TEST_RENDER_DIR = $(TEST_DIR)/render_functions
 TEST_RENDER_FILES = test_img_pix_put.c
 TEST_RENDER_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_RENDER_FILES:.c=.o))
@@ -47,7 +51,8 @@ TEST_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_FILES:.c=.o)) \
 
 all: $(BIN_DIR)/$(FDF_NAME) \
 	 $(BIN_DIR)/tests/test_parse.out \
-	 $(BIN_DIR)/tests/test_render.out
+	 $(BIN_DIR)/tests/test_render.out \
+	 $(BIN_DIR)/tests/test_vectorize.out
 
 clean:
 	rm -rf $(OBJS) $(OBJS_DIR) $(TEST_OBJS) $(TEST_OBJS_DIR)
@@ -104,6 +109,16 @@ $(BIN_DIR)/tests/test_render.out: \
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 $(TEST_OBJS_DIR)/%.o: $(TEST_RENDER_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
+	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
+
+$(BIN_DIR)/tests/test_vectorize.out: \
+	$(OBJS_DIR)/vectorize.o \
+	$(TEST_OBJS_DIR)/test_vectorize.o \
+	$(TEST_VECTORIZE_OBJS) \
+	$(LIBFT_LIB) $(MLX_LIB) | $(BIN_DIR)/tests
+	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+
+$(TEST_OBJS_DIR)/%.o: $(TEST_VECTORIZE_DIR)/%.c $(HEADER) $(TEST_HEADER) | $(TEST_OBJS_DIR)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -c $< -o $@
 
 .PHONY: all clean fclean re
