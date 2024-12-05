@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:04:25 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/04 11:35:30 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:37:36 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int capture_segfault_add_vector(t_list *(*f)(t_list **, t_point *, t_point *), t
 		exit(1);
 	}
 }
-
 MU_TEST(test_add_vector_valid_points)
 {
 	t_list	*head = NULL;
@@ -64,6 +63,10 @@ MU_TEST(test_add_vector_valid_points)
 	mu_assert_int_eq(4, vector->delta_y);
 	mu_assert_int_eq(1, vector->direction_x);
 	mu_assert_int_eq(1, vector->direction_y);
+	mu_assert_int_eq(0, vector->a->z);
+	mu_assert_int_eq(0, vector->b->z);
+	mu_assert_int_eq(0, vector->a->color);
+	mu_assert_int_eq(0, vector->b->color);
 	mu_assert(head->next == NULL, "The next node should be NULL");
 
 	free(vector);
@@ -89,6 +92,10 @@ MU_TEST(test_add_vector_negative_delta)
 	mu_assert_int_eq(-4, vector->delta_y);
 	mu_assert_int_eq(-1, vector->direction_x);
 	mu_assert_int_eq(-1, vector->direction_y);
+	mu_assert_int_eq(0, vector->a->z);
+	mu_assert_int_eq(0, vector->b->z);
+	mu_assert_int_eq(0, vector->a->color);
+	mu_assert_int_eq(0, vector->b->color);
 	mu_assert(head->next == NULL, "The next node should be NULL");
 
 	free(vector);
@@ -101,11 +108,11 @@ MU_TEST(test_add_vector_null_head)
 	t_point	a = {0, 0, 0, 0};
 	t_point	b = {0, 3, 4, 0};
 
-	int segfaulted = capture_segfault_add_vector(add_vector, NULL, &a, &b);
+	int segfaulted = capture_segfault_add_vector(add_vector, &head, &a, &b);
 	if (!segfaulted)
 		add_vector(&head, &a, &b);
 
-	if (!segfaulted)
+	if (segfaulted)
 		mu_fail("Function should not cause a segmentation fault when head is NULL.");
 }
 
@@ -119,7 +126,7 @@ MU_TEST(test_add_vector_null_points)
 	if (!segfaulted)
 		add_vector(&head, a, b);
 
-	if (!segfaulted)
+	if (segfaulted)
 		mu_fail("Function should not cause a segmentation fault when points are NULL.");
 }
 
@@ -146,6 +153,10 @@ MU_TEST(test_add_vector_multiple_vectors)
 	mu_assert_int_eq(4, vector2->delta_y);
 	mu_assert_int_eq(1, vector2->direction_x);
 	mu_assert_int_eq(1, vector2->direction_y);
+	mu_assert_int_eq(0, vector2->a->z);
+	mu_assert_int_eq(0, vector2->b->z);
+	mu_assert_int_eq(0, vector2->a->color);
+	mu_assert_int_eq(0, vector2->b->color);
 
 	mu_assert(head->next != NULL, "The next node should not be NULL");
 	vector1 = (t_vector *)head->next->content;
@@ -157,6 +168,10 @@ MU_TEST(test_add_vector_multiple_vectors)
 	mu_assert_int_eq(4, vector1->delta_y);
 	mu_assert_int_eq(1, vector1->direction_x);
 	mu_assert_int_eq(1, vector1->direction_y);
+	mu_assert_int_eq(0, vector1->a->z);
+	mu_assert_int_eq(0, vector1->b->z);
+	mu_assert_int_eq(0, vector1->a->color);
+	mu_assert_int_eq(0, vector1->b->color);
 
 	mu_assert(head->next->next == NULL, "The next node of the second vector should be NULL");
 

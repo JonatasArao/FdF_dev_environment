@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/fdf",
-            "args": ["${workspaceFolder}/test_maps/julia.fdf"],
+            "args": ["${workspaceFolder}/test_maps/test.fdf"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "externalConsole": false,

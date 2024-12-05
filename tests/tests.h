@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:09:35 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/04 11:10:44 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:28:10 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	test_parse_mapfile(void);
 
 int	test_extract_points(void);
 
+int	test_set_vector_properties(void);
+
 int	test_add_vector(void);
+
+int test_generate_vector_list(void);
 
 #endif

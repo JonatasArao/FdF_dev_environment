@@ -17,7 +17,7 @@ HEADER = $(HEADER_DIR)/fdf.h
 INCLUDES = -I$(HEADER_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 
 SRCS_DIR = $(TARGET)/src
-SRCS_FILES = parse.c render.c main.c
+SRCS_FILES = vectorize.c parse.c render.c main.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS_DIR = $(TARGET)/objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
@@ -38,7 +38,9 @@ TEST_PARSE_FILES =	test_parse_cell.c \
 TEST_PARSE_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_PARSE_FILES:.c=.o))
 
 TEST_VECTORIZE_DIR = $(TEST_DIR)/vectorize_functions
-TEST_VECTORIZE_FILES = test_add_vector.c
+TEST_VECTORIZE_FILES =	test_set_vector_properties.c \
+						test_add_vector.c \
+						test_generate_vector_list.c
 TEST_VECTORIZE_OBJS = $(addprefix $(TEST_OBJS_DIR)/, $(TEST_VECTORIZE_FILES:.c=.o))
 
 TEST_RENDER_DIR = $(TEST_DIR)/render_functions
