@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:04:25 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/05 17:42:16 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:41:03 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ MU_TEST(test_generate_vector_list_single_point)
 	t_list	*points = NULL;
 	t_list	*vectors;
 
-	t_point a = {0, 0, 0, 0};
+	t_point a = {0, 0, 0, 0, 0, 0};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 
 	vectors = generate_vector_list(points);
@@ -44,8 +44,8 @@ MU_TEST(test_generate_vector_list_two_connected_points)
 	t_list	*vectors;
 	t_vector *vector;
 
-	t_point a = {0, 1, 0, 0};
-	t_point b = {0, 0, 0, 0};
+	t_point a = {0, 1, 0, 0, 1, 0};
+	t_point b = {0, 0, 0, 0, 0, 0};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 	ft_lstadd_back(&points, ft_lstnew(&b));
 
@@ -57,10 +57,6 @@ MU_TEST(test_generate_vector_list_two_connected_points)
 	mu_assert_int_eq(0, vector->a->y);
 	mu_assert_int_eq(0, vector->b->x);
 	mu_assert_int_eq(0, vector->b->y);
-	mu_assert_int_eq(-1, vector->delta_x);
-	mu_assert_int_eq(0, vector->delta_y);
-	mu_assert_int_eq(-1, vector->direction_x);
-	mu_assert_int_eq(1, vector->direction_y);
 
 	ft_lstclear(&points, dummy_del);
 	ft_lstclear(&vectors, free);
@@ -71,8 +67,8 @@ MU_TEST(test_generate_vector_list_no_connected_points)
 	t_list	*points = NULL;
 	t_list	*vectors;
 
-	t_point a = {0, 0, 0, 0};
-	t_point b = {2, 2, 0, 0};
+	t_point a = {0, 0, 0, 0, 0, 0};
+	t_point b = {2, 2, 0, 0, 2, 0};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 	ft_lstadd_back(&points, ft_lstnew(&b));
 
@@ -89,9 +85,9 @@ MU_TEST(test_generate_vector_list_multiple_connected_points)
 	t_list	*vectors;
 	t_vector *vector;
 
-	t_point a = {0, 1, 1, 0};
-	t_point b = {0, 0, 1, 0};
-	t_point c = {0, 1, 0, 0};
+	t_point a = {0, 1, 1, 0, 1, 1};
+	t_point b = {0, 0, 1, 0, 0, 1};
+	t_point c = {0, 1, 0, 0, 1, 0};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 	ft_lstadd_back(&points, ft_lstnew(&b));
 	ft_lstadd_back(&points, ft_lstnew(&c));
@@ -105,20 +101,12 @@ MU_TEST(test_generate_vector_list_multiple_connected_points)
 	mu_assert_int_eq(1, vector->a->y);
 	mu_assert_int_eq(1, vector->b->x);
 	mu_assert_int_eq(0, vector->b->y);
-	mu_assert_int_eq(0, vector->delta_x);
-	mu_assert_int_eq(-1, vector->delta_y);
-	mu_assert_int_eq(1, vector->direction_x);
-	mu_assert_int_eq(-1, vector->direction_y);
 
 	vector = (t_vector *)vectors->next->content;
 	mu_assert_int_eq(1, vector->a->x);
 	mu_assert_int_eq(1, vector->a->y);
 	mu_assert_int_eq(0, vector->b->x);
 	mu_assert_int_eq(1, vector->b->y);
-	mu_assert_int_eq(-1, vector->delta_x);
-	mu_assert_int_eq(0, vector->delta_y);
-	mu_assert_int_eq(-1, vector->direction_x);
-	mu_assert_int_eq(1, vector->direction_y);
 
 	ft_lstclear(&points, dummy_del);
 	ft_lstclear(&vectors, free);
@@ -129,9 +117,9 @@ MU_TEST(test_generate_vector_list_disconnected_points)
 	t_list	*points = NULL;
 	t_list	*vectors;
 
-	t_point a = {0, 0, 0, 0};
-	t_point b = {0, 1, 1, 0};
-	t_point c = {0, 2, 3, 0};
+	t_point a = {0, 0, 0, 0, 0, 0};
+	t_point b = {0, 1, 1, 0, 1, 1};
+	t_point c = {0, 2, 3, 0, 2, 3};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 	ft_lstadd_back(&points, ft_lstnew(&b));
 	ft_lstadd_back(&points, ft_lstnew(&c));
@@ -149,11 +137,11 @@ MU_TEST(test_generate_vector_list_mixed_connected_and_disconnected_points)
 	t_list	*vectors;
 	t_vector *vector;
 
-	t_point a = {0, 2, 3, 0};
-	t_point b = {0, 1, 1, 0};
-	t_point c = {0, 3, 2, 0};
-	t_point d = {0, 0, 1, 0};
-	t_point e = {0, 1, 0, 0};
+	t_point a = {0, 2, 3, 0, 2, 3};
+	t_point b = {0, 1, 1, 0, 1, 1};
+	t_point c = {0, 3, 2, 0, 3, 2};
+	t_point d = {0, 0, 1, 0, 0, 1};
+	t_point e = {0, 1, 0, 0, 1, 0};
 	ft_lstadd_back(&points, ft_lstnew(&a));
 	ft_lstadd_back(&points, ft_lstnew(&b));
 	ft_lstadd_back(&points, ft_lstnew(&c));
@@ -169,20 +157,12 @@ MU_TEST(test_generate_vector_list_mixed_connected_and_disconnected_points)
 	mu_assert_int_eq(1, vector->a->y);
 	mu_assert_int_eq(1, vector->b->x);
 	mu_assert_int_eq(0, vector->b->y);
-	mu_assert_int_eq(0, vector->delta_x);
-	mu_assert_int_eq(-1, vector->delta_y);
-	mu_assert_int_eq(1, vector->direction_x);
-	mu_assert_int_eq(-1, vector->direction_y);
 
 	vector = (t_vector *)vectors->next->content;
 	mu_assert_int_eq(1, vector->a->x);
 	mu_assert_int_eq(1, vector->a->y);
 	mu_assert_int_eq(0, vector->b->x);
 	mu_assert_int_eq(1, vector->b->y);
-	mu_assert_int_eq(-1, vector->delta_x);
-	mu_assert_int_eq(0, vector->delta_y);
-	mu_assert_int_eq(-1, vector->direction_x);
-	mu_assert_int_eq(1, vector->direction_y);
 
 	mu_assert(vectors->next->next == NULL, "The next vector should be NULL");
 

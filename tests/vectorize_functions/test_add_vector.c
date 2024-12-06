@@ -6,7 +6,7 @@
 /*   By: jarao-de <jarao-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:04:25 by jarao-de          #+#    #+#             */
-/*   Updated: 2024/12/05 17:37:36 by jarao-de         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:40:47 by jarao-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ MU_TEST(test_add_vector_valid_points)
 {
 	t_list	*head = NULL;
 	t_vector *vector;
-	t_point	a = {0, 0, 0, 0};
-	t_point	b = {0, 3, 4, 0};
+	t_point	a = {0, 0, 0, 0, 0, 0};
+	t_point	b = {0, 3, 4, 0, 3, 4};
 
 	add_vector(&head, &a, &b);
 
@@ -59,10 +59,6 @@ MU_TEST(test_add_vector_valid_points)
 	mu_assert_int_eq(0, vector->a->y);
 	mu_assert_int_eq(3, vector->b->x);
 	mu_assert_int_eq(4, vector->b->y);
-	mu_assert_int_eq(3, vector->delta_x);
-	mu_assert_int_eq(4, vector->delta_y);
-	mu_assert_int_eq(1, vector->direction_x);
-	mu_assert_int_eq(1, vector->direction_y);
 	mu_assert_int_eq(0, vector->a->z);
 	mu_assert_int_eq(0, vector->b->z);
 	mu_assert_int_eq(0, vector->a->color);
@@ -77,8 +73,8 @@ MU_TEST(test_add_vector_negative_delta)
 {
 	t_list	*head = NULL;
 	t_vector *vector;
-	t_point	a = {0, 3, 4, 0};
-	t_point	b = {0, 0, 0, 0};
+	t_point	a = {0, 3, 4, 0, 3, 4};
+	t_point	b = {0, 0, 0, 0, 0, 0};
 
 	add_vector(&head, &a, &b);
 
@@ -88,10 +84,6 @@ MU_TEST(test_add_vector_negative_delta)
 	mu_assert_int_eq(4, vector->a->y);
 	mu_assert_int_eq(0, vector->b->x);
 	mu_assert_int_eq(0, vector->b->y);
-	mu_assert_int_eq(-3, vector->delta_x);
-	mu_assert_int_eq(-4, vector->delta_y);
-	mu_assert_int_eq(-1, vector->direction_x);
-	mu_assert_int_eq(-1, vector->direction_y);
 	mu_assert_int_eq(0, vector->a->z);
 	mu_assert_int_eq(0, vector->b->z);
 	mu_assert_int_eq(0, vector->a->color);
@@ -105,8 +97,8 @@ MU_TEST(test_add_vector_negative_delta)
 MU_TEST(test_add_vector_null_head)
 {
 	t_list	*head = NULL;
-	t_point	a = {0, 0, 0, 0};
-	t_point	b = {0, 3, 4, 0};
+	t_point	a = {0, 0, 0, 0, 0, 0};
+	t_point	b = {0, 3, 4, 0, 3, 4};
 
 	int segfaulted = capture_segfault_add_vector(add_vector, &head, &a, &b);
 	if (!segfaulted)
@@ -135,10 +127,10 @@ MU_TEST(test_add_vector_multiple_vectors)
 	t_list	*head = NULL;
 	t_vector *vector1;
 	t_vector *vector2;
-	t_point	a1 = {0, 0, 0, 0};
-	t_point	b1 = {0, 3, 4, 0};
-	t_point	a2 = {0, 1, 1, 0};
-	t_point	b2 = {0, 4, 5, 0};
+	t_point	a1 = {0, 0, 0, 0, 0, 0};
+	t_point	b1 = {0, 3, 4, 0, 3, 4};
+	t_point	a2 = {0, 1, 1, 0, 1, 1};
+	t_point	b2 = {0, 4, 5, 0, 4, 5};
 
 	add_vector(&head, &a1, &b1);
 	add_vector(&head, &a2, &b2);
@@ -149,10 +141,6 @@ MU_TEST(test_add_vector_multiple_vectors)
 	mu_assert_int_eq(1, vector2->a->y);
 	mu_assert_int_eq(4, vector2->b->x);
 	mu_assert_int_eq(5, vector2->b->y);
-	mu_assert_int_eq(3, vector2->delta_x);
-	mu_assert_int_eq(4, vector2->delta_y);
-	mu_assert_int_eq(1, vector2->direction_x);
-	mu_assert_int_eq(1, vector2->direction_y);
 	mu_assert_int_eq(0, vector2->a->z);
 	mu_assert_int_eq(0, vector2->b->z);
 	mu_assert_int_eq(0, vector2->a->color);
@@ -164,10 +152,6 @@ MU_TEST(test_add_vector_multiple_vectors)
 	mu_assert_int_eq(0, vector1->a->y);
 	mu_assert_int_eq(3, vector1->b->x);
 	mu_assert_int_eq(4, vector1->b->y);
-	mu_assert_int_eq(3, vector1->delta_x);
-	mu_assert_int_eq(4, vector1->delta_y);
-	mu_assert_int_eq(1, vector1->direction_x);
-	mu_assert_int_eq(1, vector1->direction_y);
 	mu_assert_int_eq(0, vector1->a->z);
 	mu_assert_int_eq(0, vector1->b->z);
 	mu_assert_int_eq(0, vector1->a->color);
